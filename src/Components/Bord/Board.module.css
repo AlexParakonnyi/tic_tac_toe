@@ -1,0 +1,13 @@
+.cell {
+    height: 200px;
+    font-size: 150px;
+    line-height: 180px;
+    text-align: center;
+    border: 1px solid #000;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    justify-content: center;
+}
