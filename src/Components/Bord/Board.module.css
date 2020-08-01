@@ -1,13 +1,26 @@
 .cell {
-    height: 200px;
+    height: 180px;
     font-size: 150px;
     line-height: 180px;
     text-align: center;
-    border: 1px solid #000;
+    user-select: none;
+    cursor: pointer;
+    background: white;
 }
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 200px);
+    grid-template-columns: repeat(3, 180px);
     justify-content: center;
+    grid-gap: 15px;
+    background: darkgrey;
+    border-radius: 50%;
+}
+
+.circle {
+    color: darkgreen;
+}
+
+.cross {
+    color: darkred;
 }

@@ -1,0 +1,11 @@
+.cross {
+    color: darkgreen;
+    font-family: Menlo;
+    font-weight: bold;
+}
+
+.zero {
+    color: darkred;
+    font-family: Menlo;
+    font-weight: bold;
+}

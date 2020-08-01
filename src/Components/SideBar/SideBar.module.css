@@ -6,5 +6,19 @@
 .wrapper {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     width: 300px;
+    user-select: none;
+}
+
+.history {
+    margin: 20px 0;
+    font-size: 22px;
+    /*border: 1px solid #000;*/
+}
+
+.item {
+    border-bottom: 1px solid #000;
+    margin: 0 0 15px 0;
+    cursor: pointer;
 }

@@ -8,3 +8,13 @@
 .sideBar {
     margin: 0 30px;
 }
+
+.value {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.margin {
+    margin-right: 15px;
+}

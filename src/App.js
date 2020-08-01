@@ -2,42 +2,72 @@ import React from 'react';
 import s from "./App.module.css"
 import Board from "./Components/Bord/Board";
 import SideBar from "./Components/SideBar/SideBar";
+import Value from "./Components/Value/Value";
 
 class App extends React.Component {
 
     state = {
-        cells: Array(9).fill(null),
+        history: [
+            Array(9).fill(null),
+        ],
         isXNext: true,
+        currentBoard: 0,
     };
 
     handleClick = (i) => {
-        const cellsClone = this.state.cells.slice();
+        const history = this.state.history.slice(0, this.state.currentBoard + 1);
+        const current = history[history.length - 1];
+        const cells = current.slice();
 
-        cellsClone[i] = this.state.isXNext ? "X" : "O";
-        if (this.returnWinner(this.state.cells)) return;
+        if (cells[i]) return;
+        if (this.returnWinner(cells)) return;
+
+        cells[i] = this.state.isXNext ? "X" : "O";
+        history.push(cells);
 
         this.setState({
-            cells: cellsClone,
+            history: history,
             isXNext: !this.state.isXNext,
+            currentBoard: history.length - 1,
         })
     };
 
     getStatus = () => {
-        const winner = this.returnWinner(this.state.cells);
+        const current = this.state.history[this.state.currentBoard];
+        const winner = this.returnWinner(current);
         if (winner) {
-            return `${winner} is winner`;
+            return (
+                <div className={s.value}>
+                    <Value value={winner}/>
+                    <span className={s.margin}/>
+                    is winner
+                </div>
+            )
         } else {
-            return `${this.state.isXNext ? "X" : "O"} is next`;
+            return (
+                    <div className={s.value}>
+                        <Value value={this.state.isXNext ? 'X' : 'O'}/>
+                        <span className={s.margin}/>
+                        is next
+                    </div>
+            )
         }
     };
 
+    clickMoveTo = (i) => {
+        this.setState({
+            currentBoard: i,
+            isXNext: i % 2 === 0,
+        })
+    };
 
     render() {
+        const currentCells = this.state.history[this.state.currentBoard];
         return (
             <div className={s.wrapper}>
-                <Board cells={this.state.cells} handleClick={this.handleClick}/>
+                <Board cells={currentCells} handleClick={this.handleClick}/>
                 <div className={s.sideBar}>
-                    <SideBar status={this.getStatus()}/>
+                    <SideBar status={this.getStatus()} steps={this.state.history} click={this.clickMoveTo}/>
                 </div>
             </div>
         );
